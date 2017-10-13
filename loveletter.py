@@ -66,7 +66,7 @@ class LoveLetter:
             if(player[turnNumber].cards[0] > player[another_player].cards[0]):
                 player[turnNumber].alive = False
                 public_message += "Player " + names[turnNumber] + " discarded his Baron and had a larger dick than " + names[target_player]
-            else if(player[turnNumber].cards[0] < player[another_player].cards[0]):
+            elif(player[turnNumber].cards[0] < player[another_player].cards[0]):
                 player[another_player] = False
                 public_message += "Player " + names[turnNumber] + " discarded his Baron and had a smaller dick than " + names[target_player]
 
@@ -92,7 +92,7 @@ class LoveLetter:
     # Moves the turn forward
     def advance():
         turnNumber = (turnNumber + 1) % players
-        while(!player.alive):
+        while(player.alive == False):
             turnNumber = (turnNumber + 1) % players
 
     # Returns the amount of cards left
@@ -104,14 +104,14 @@ class LoveLetter:
         if(len(deck) == 0 or players_left() == 0):
             return 0
         new_card = deck.pop()
-        player[player_number).cards[1] = new_card
+        player[player_number].cards[1] = new_card
         return new_card
     # Returns amount of players alive
     def players_left():
         n = 0
-        for i : player:
+        for i in player:
             if i.alive:
-                n++
+                n += 1
         return n
 
 class LoveLetterPlayer:
@@ -126,7 +126,7 @@ class LoveLetterPlayer:
         if(cards[1] == card):
             cards[1] == None
             return True
-        else if(cards[0] == card):
+        elif(cards[0] == card):
             cards[0] == cards[1]
             cards[1] == None
             return True
