@@ -1,5 +1,5 @@
 #from telegram.ext import Updater, CommandHandler
-import telegram
+from telegram.ext import Updater, CommandHandler
 import pprint
 pp = pprint.PrettyPrinter(indent=4)
 
@@ -7,32 +7,24 @@ from messages import *
 
 chatStates = {}
 
-bot = telegram.Bot(token='468086505:AAGr_hubo_N0hjIR7ouUkZZvoHnhFl4ngr4')
+#bot = telegram.Bot(token='468086505:AAGr_hubo_N0hjIR7ouUkZZvoHnhFl4ngr4')
 
-done = False
+updater = Updater('468086505:AAGr_hubo_N0hjIR7ouUkZZvoHnhFl4ngr4')
 
-while ( not done ):
-	try:
-		updates = bot.getUpdates( offset = 	-1 ,limit = 1 )
-		while (updates):
-			u = updates.pop()
 
-			#make sure unique post
-			if not u.message.chat.id in chatStates:
-				chatStates[u.message.chat.id] = {'LastMessageId':u.message.message_id, 'game':[]}
-				bot.sendMessage(chat_id=u.message.chat.id, text= GREET )
-			if (chatStates[u.message.chat.id]['LastMessageId'] != u.message.message_id):
-				#pp.pprint(dir(u.message))
-				pp.pprint(u.message.text)
-				if (u.message.text == "/help"):
-					bot.sendMessage(chat_id=u.message.chat.id, text= HELP )
+def start(bot, update):
+	update.message.reply_text('Hello World!')
 
-				chatStates[u.message.chat.id]['LastMessageId'] = u.message.message_id
+def help(bot, update):
+	update.message.reply_text(HELP)
 
-	except KeyboardInterrupt:
-		print("\nexitting super gracefully-des\n")
-		done = True
-	except Exception as e:
-		print(e)
-		print("something went wrong ^^' ")
+def startGame(bot, update):
+	pp.pprint(dir(update))
+	update.message.reply_text(HELP)
 
+updater.dispatcher.add_handler(CommandHandler('start', start))
+updater.dispatcher.add_handler(CommandHandler('help', help))
+updater.dispatcher.add_handler(CommandHandler('newGame', startGame))
+
+updater.start_polling()
+updater.idle()
