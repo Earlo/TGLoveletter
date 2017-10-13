@@ -31,8 +31,6 @@ def enter(bot, update):
 	messageID = update.message.from_user.id
 
 	#update.message.reply_text( "{} from {} in {}".format(messageID, playerID, chatID) )
-	print(chatID, chats)
-	print(chatID in chats)
 	if not chatID in chats:
 		chats[chatID] = { 'players': set(), 'game': None }
 		update.message.reply_text( "Starting gameroom from {}".format( chatID ) )
@@ -41,11 +39,8 @@ def enter(bot, update):
 	AddPlayer(update, chatID, playerID)
 
 def AddPlayer(update, chatID, playerID):
-	print(chats, chatID)
-	print(chats[chatID]['players'])
 	try:
 		chats[chatID]['players'].add(playerID)
-		print(chats[chatID]['players'])
 		update.message.reply_text( "Added {}".format( playerID ) )
 	except:
 		update.message.reply_text( "wat" )
