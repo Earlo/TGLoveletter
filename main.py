@@ -49,7 +49,6 @@ def AddPlayer(update, chatID, playerID):
 		print(chats[chatID]['players'])
 		update.message.reply_text( "Added {}".format( playerID ) )
 	except:
-		print("?")
 		update.message.reply_text( "wat" )
 
 def ListPlayers(bot, update):
@@ -63,6 +62,8 @@ def startGame(bot, update):
 	try:
 		print("log: staring game with:" + repr( chats[chatID]['players'] ) )
 		update.message.reply_text( repr( chats[chatID]['players'] ) )
+		bot.sendMessage(parse_mode='Markdown', chat_id=playerID, text="Moi Jäbä privailen tässä saatana")
+
 	except:
 		update.message.reply_text("No game going on in here, use /enter")
 
