@@ -8,12 +8,13 @@ pp = pprint.PrettyPrinter(indent=4)
 from messages import *
 
 chats = {}
-games = {}
 
 updater = Updater('468086505:AAGr_hubo_N0hjIR7ouUkZZvoHnhFl4ngr4')
 
 
 def start(bot, update):
+	chatID = update.message.chat.id
+	bot.sendMessage(parse_mode='Markdown', chat_id=chatID, text=LORE)
 	update.message.reply_text('Hello World!')
 
 def help(bot, update):
@@ -30,21 +31,23 @@ def enter(bot, update):
 	playerID = update.message.from_user.id
 	messageID = update.message.from_user.id
 
-	update.message.reply_text( "{} from {} in {}".format(messageID, playerID, chatID) )
-	if not chatID in chats.keys():
+	#update.message.reply_text( "{} from {} in {}".format(messageID, playerID, chatID) )
+	print(chatID, chats)
+	print(chatID in chats)
+	if not chatID in chats:
+		chats[chatID] = { 'players': set(), 'game': None }
 		update.message.reply_text( "Starting gameroom from {}".format( chatID ) )
-		chats[chatID] = { 'players': set() }
 	else:
 		update.message.reply_text( "already game in {}.".format( chatID ) )
 	AddPlayer(update, chatID, playerID)
 
-def AddPlayer(update, ChatID, PlayerID):
-	print(chats, ChatID)
-	print(chats[ChatID]['players'])
+def AddPlayer(update, chatID, playerID):
+	print(chats, chatID)
+	print(chats[chatID]['players'])
 	try:
-		chats[ChatID]['players'].add(PlayerID)
-		print(chats[ChatID]['players'])
-		update.message.reply_text( "Added {}".format( PlayerID ) )
+		chats[chatID]['players'].add(playerID)
+		print(chats[chatID]['players'])
+		update.message.reply_text( "Added {}".format( playerID ) )
 	except:
 		print("?")
 		update.message.reply_text( "wat" )
@@ -54,18 +57,14 @@ def ListPlayers(bot, update):
 	update.message.reply_text( repr( chats[chatID]['players'] ) )
 
 def startGame(bot, update):
-	if len(list(games.keys())) > 0:
-		nkey = max(list(games.keys())) + 1 
-	else:
-		nkey = 0
-	if len(update.message.text.split(" ")) >= 2:
-		pcount = int ( update.message.text.split(" ")[1] )
-		update.message.reply_text("Created game #{} with {} players".format(nkey, pcount))
-		games[nkey] = "JEBU"#loveletter.LoveLetter()
-
-		print(nkey, pcount)
-	else:
-		update.message.reply_text("please specify player count")
+	chatID = update.message.chat.id
+	playerID = update.message.from_user.id
+	messageID = update.message.from_user.id
+	try:
+		print("log: staring game with:" + repr( chats[chatID]['players'] ) )
+		update.message.reply_text( repr( chats[chatID]['players'] ) )
+	except:
+		update.message.reply_text("No game going on in here, use /enter")
 
 
 	
