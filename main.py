@@ -1,42 +1,54 @@
 #from telegram.ext import Updater, CommandHandler
-import telegram
+from telegram.ext import Updater, CommandHandler
 import pprint
+import loveletter
+
 pp = pprint.PrettyPrinter(indent=4)
 
 from messages import *
 
-chatStates = {}
+games = {}
 
-bot = telegram.Bot(token='468086505:AAGr_hubo_N0hjIR7ouUkZZvoHnhFl4ngr4')
+#bot = telegram.Bot(token='468086505:AAGr_hubo_N0hjIR7ouUkZZvoHnhFl4ngr4')
 
-done = False
+updater = Updater('468086505:AAGr_hubo_N0hjIR7ouUkZZvoHnhFl4ngr4')
 
-while ( not done ):
-	try:
-		updates = bot.getUpdates( offset = 	-1 ,limit = 1 )
-		while (updates):
-			u = updates.pop()
 
-			#make sure unique post
-			if not u.message.chat.id in chatStates:
-				chatStates[u.message.chat.id] = {'LastMessageId':u.message.message_id, 'game':[]}
-				bot.sendMessage(chat_id=u.message.chat.id, text= GREET )
-			if (chatStates[u.message.chat.id]['LastMessageId'] != u.message.message_id):
-				#pp.pprint(dir(u.message))
-				pp.pprint(u.message.text)
-				if (u.message.text == "/help"):
-					bot.sendMessage(chat_id=u.message.chat.id, text= HELP )
-				elif (u.message.text == "/rules"):
-					bot.sendMessage(chat_id=u.message.chat.id, text= RULES)
-				elif (u.message.text == "/lore"):
-					bot.sendMessage(chat_id=u.message.chat.id, text= LORE)
+def start(bot, update):
+	update.message.reply_text('Hello World!')
 
-				chatStates[u.message.chat.id]['LastMessageId'] = u.message.message_id
+def help(bot, update):
+	update.message.reply_text(HELP)
+	
+def rules(bot, update):
+	update.message.reply_text(RULES)
+	
+def lore(bot, update):
+	update.message.reply_text(LORE)
 
-	except KeyboardInterrupt:
-		print("\nexitting super gracefully-des\n")
-		done = True
-	except Exception as e:
-		print(e)
-		print("something went wrong ^^' ")
+def startGame(bot, update):
+	#pp.pprint(dir(update.message))
+	if len(list(games.keys())) > 0:
+		nkey = max(list(games.keys())) + 1 
+	else:
+		nkey = 0
+	if len(update.message.text.split(" ")) >= 2:
+		pcount = int ( update.message.text.split(" ")[1] )
+		update.message.reply_text("Created game #{} with {} players".format(nkey, pcount))
+		print(nkey, pcount)
+	else:
+		update.message.reply_text("please specify player count")
 
+
+	#games[nkey] = loveletter.LoveLetter()
+	
+	#update.message.reply_text(update.message.text)
+
+updater.dispatcher.add_handler(CommandHandler('start', start))
+updater.dispatcher.add_handler(CommandHandler('help', help))
+updater.dispatcher.add_handler(CommandHandler('newGame', startGame))
+updater.dispatcher.add_handler(CommandHandler('rules', rules))
+updater.dispatcher.add_handler(CommandHandler('newGame', lore))
+
+updater.start_polling()
+updater.idle()
