@@ -17,16 +17,15 @@ class LoveLetter:
     burn = None
 
     def __init__(players):
-        if(players > 14):
+        if(len(players) > 14):
             raise ValueError("There is already the max amount of players in the game.")
             return
-        players_left = players
-
-        player = [None] * players
+        player = [None] * len(players)
         for p in player:
             p = LoveLetterPlayer(deck.pop())
         p[0].second = deck.pop()
         burn = deck.pop() #Burn
+        names = players
 
     def play(card, target_player = 0, card_guess = 0):
         if card not in player[turnNumber].cards:
@@ -78,8 +77,9 @@ class LoveLetter:
         if card == 1: #Guard
             if(guess_card in player[another_player].cards):
                 player[another_player].alive = False
-                public_message += "Player " + names[turnNumber] + " discarded their Guard targeting player " + names[target_player] + " who died for having a " + card_guess
-            public_message += "Player " + names[turnNumber] + " discarded his Guard targeting player " + names[target_player] + " who did not have a " + card_guess
+                public_message += "Player " + names[turnNumber] + " discarded their guard targeting player " + names[target_player] + " who died for having a " + card_guess
+            else:
+                public_message += "Player " + names[turnNumber] + " discarded their guard targeting player " + names[target_player] + " who did not have a " + card_guess
 
 
         this.advance()
@@ -113,6 +113,10 @@ class LoveLetter:
             if i.alive:
                 n += 1
         return n
+
+    # Returns name of current playing player
+    def current_name():
+        return names[turnNumber]
 
 class LoveLetterPlayer:
     handmaiden = False
