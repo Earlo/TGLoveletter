@@ -26,6 +26,10 @@ while ( not done ):
 				pp.pprint(u.message.text)
 				if (u.message.text == "/help"):
 					bot.sendMessage(chat_id=u.message.chat.id, text= HELP )
+				elif (u.message.text == "/rules"):
+					bot.sendMessage(chat_id=u.message.chat.id, text= RULES)
+				elif (u.message.text == "/lore"):
+					bot.sendMessage(chat_id=u.message.chat.id, text= LORE)
 
 				chatStates[u.message.chat.id]['LastMessageId'] = u.message.message_id
 
