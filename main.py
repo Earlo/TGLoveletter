@@ -10,8 +10,6 @@ from messages import *
 chats = {}
 games = {}
 
-#bot = telegram.Bot(token='468086505:AAGr_hubo_N0hjIR7ouUkZZvoHnhFl4ngr4')
-
 updater = Updater('468086505:AAGr_hubo_N0hjIR7ouUkZZvoHnhFl4ngr4')
 
 
@@ -29,12 +27,25 @@ def enter(bot, update):
 	update.message.reply_text( "{} from {} in {}".format(messageID, playerID, chatID) )
 	if not chatID in chats.keys():
 		update.message.reply_text( "Starting gameroom from {}".format( chatID ) )
-		chats[chatID] = "JEBUBU"
+		chats[chatID] = { 'players': set() }
 	else:
 		update.message.reply_text( "already game in {}.".format( chatID ) )
-		AddPlayer():
+	AddPlayer(update, chatID, playerID)
 
-def AddPlayer(ChatID):
+def AddPlayer(update, ChatID, PlayerID):
+	print(chats, ChatID)
+	print(chats[ChatID]['players'])
+	try:
+		chats[ChatID]['players'].add(PlayerID)
+		print(chats[ChatID]['players'])
+		update.message.reply_text( "Added {}".format( PlayerID ) )
+	except:
+		print("?")
+		update.message.reply_text( "wat" )
+
+def ListPlayers(bot, update):
+	chatID = update.message.chat.id
+	update.message.reply_text( repr( chats[chatID]['players'] ) )
 
 def startGame(bot, update):
 	if len(list(games.keys())) > 0:
@@ -56,6 +67,8 @@ def startGame(bot, update):
 updater.dispatcher.add_handler(CommandHandler('newGame', startGame))
 updater.dispatcher.add_handler(CommandHandler('start', start))
 updater.dispatcher.add_handler(CommandHandler('enter', enter))
+updater.dispatcher.add_handler(CommandHandler('list', ListPlayers))
+
 updater.dispatcher.add_handler(CommandHandler('help', help))
 
 updater.start_polling()
