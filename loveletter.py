@@ -18,7 +18,7 @@ class LoveLetter:
 
         player = [None] * players
         for p in player:
-            p = new LoveLetterPlayer(deck.pop())
+            p = LoveLetterPlayer(deck.pop())
         p[0].second = deck.pop()
         burn = deck.pop() #Burn
 
@@ -50,25 +50,25 @@ class LoveLetter:
         if card == 5: #Prince
             if(player[turnNumber].has(7)):
                 raise ValueError("Can't discard a Prince if player has the Countess")
-            player[turnNumber].remove(7):
+            player[turnNumber].remove(7)
             self.advance()
             last_discard = card
             return 0
 
         if card == 4: #HandMaiden
-            player[turnNumber].remove(card):
+            player[turnNumber].remove(card)
             player[turnNumber].handMaiden = True
             self.advance()
             return 0
 
         if card == 3: #Baron
-            player[turnNumber].remove(card):
+            player[turnNumber].remove(card)
             if(player[turnNumber].cards[0] > player[another_player].cards[0]):
                 player[turnNumber].alive = False
                 before_advance = turnNumber
                 self.advance()
                 return before_advance
-            else if(player[turnNumber].cards[0] < player[another_player].cards[0]):
+            elif(player[turnNumber].cards[0] < player[another_player].cards[0]):
                 player[another_player] = False
                 self.advance()
                 return another_player

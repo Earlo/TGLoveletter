@@ -13,6 +13,8 @@ updater = Updater('468086505:AAGr_hubo_N0hjIR7ouUkZZvoHnhFl4ngr4')
 
 
 def start(bot, update):
+	chatID = update.message.chat.id
+	bot.sendMessage(parse_mode='Markdown', chat_id=chatID, text=LORE)
 	update.message.reply_text('Hello World!')
 
 def help(bot, update):
@@ -59,7 +61,7 @@ def startGame(bot, update):
 	playerID = update.message.from_user.id
 	messageID = update.message.from_user.id
 	try:
-		print("Onko" + repr( chats[chatID]['players'] ) )
+		print("log: staring game with:" + repr( chats[chatID]['players'] ) )
 		update.message.reply_text( repr( chats[chatID]['players'] ) )
 	except:
 		update.message.reply_text("No game going on in here, use /enter")
