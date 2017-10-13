@@ -16,9 +16,9 @@ If a player is knocked out of the round, that player discards the card in his or
 *End of a round*
 A round ends if the deck is empty at the end of a turn. The royal residence closes for the evening, the person closest to the princess delivers the love letter, and Princess Annette retires to her chambers to read it. All players still in the round reveal their hands. The player with the highest ranked person wins the round. In case of a tie, the player who discarded the highest total value of cards wins. A round also ends if all players but one are out of the round, in which case the remaining player wins. The winner receives a token of affection. A new round begins after the previous one ends. The winner of the previous round goes first, because the princess speaks kindly of him or her at breakfast.
 *Winning* A player wins the game after winning a number of tokens based on the number of players:
-    • 2 Players 7 tokens 
-    • 3 Players 5 tokens 
-    • 4 players 4 tokens 
+  • 2 Players 7 tokens 
+  • 3 Players 5 tokens 
+  • 4 players 4 tokens 
 *The people*
 The events of this game take place between the events of Courtier and Dominare, two other games in the Tempest line. Here are brief profiles of the people in the game. 
 *8: Princess Annette*
