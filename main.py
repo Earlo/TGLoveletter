@@ -18,6 +18,12 @@ def start(bot, update):
 
 def help(bot, update):
 	update.message.reply_text(HELP)
+	
+def rules(bot, update):
+	update.message.reply_text(RULES)
+	
+def lore(bot, update):
+	update.message.reply_text(LORE)
 
 def enter(bot, update):
 	chatID = update.message.chat.id
@@ -70,6 +76,8 @@ updater.dispatcher.add_handler(CommandHandler('enter', enter))
 updater.dispatcher.add_handler(CommandHandler('list', ListPlayers))
 
 updater.dispatcher.add_handler(CommandHandler('help', help))
+updater.dispatcher.add_handler(CommandHandler('rules', rules))
+updater.dispatcher.add_handler(CommandHandler('lore', lore))
 
 updater.start_polling()
 updater.idle()
