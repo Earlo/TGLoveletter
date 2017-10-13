@@ -14,17 +14,16 @@ updater = Updater('468086505:AAGr_hubo_N0hjIR7ouUkZZvoHnhFl4ngr4')
 
 def start(bot, update):
 	chatID = update.message.chat.id
-	bot.sendMessage(parse_mode='Markdown', chat_id=chatID, text=LORE)
 	update.message.reply_text('Hello World!')
 
 def help(bot, update):
-	update.message.reply_text(HELP)
+	bot.sendMessage(parse_mode='Markdown', chat_id=chatID, text=HELP)
 	
 def rules(bot, update):
-	update.message.reply_text(RULES)
+	bot.sendMessage(parse_mode='Markdown', chat_id=chatID, text=RULES)
 	
 def lore(bot, update):
-	update.message.reply_text(LORE)
+	bot.sendMessage(parse_mode='Markdown', chat_id=chatID, text=LORE)
 
 def enter(bot, update):
 	chatID = update.message.chat.id
