@@ -37,9 +37,9 @@ def enter(bot, update):
 	#update.message.reply_text( "{} from {} in {}".format(messageID, playerID, chatID) )
 	if not chatID in chats:
 		chats[chatID] = { 'players': set(), 'game': None }
-		update.message.reply_text( "Starting gameroom from {}".format( chatID ) )
+		update.message.reply_text( "Starting game room from {}".format( chatID ) )
 	else:
-		update.message.reply_text( "already game in {}.".format( chatID ) )
+		update.message.reply_text( "Already a game in {}.".format( chatID ) )
 	AddPlayer(update, chatID, playerID)
 
 def AddPlayer(update, chatID, playerID):

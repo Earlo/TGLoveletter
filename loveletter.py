@@ -50,12 +50,12 @@ class LoveLetter:
             player[target_player].cards[0] = names[turnNumber].cards[0]
             player[turnNumber].cards[0] = save
             public_message += "Player " + names[turnNumber] + " discarded their King and switched his hand with " + names[target_player] + "\n"
-            private_messages = [Message("You have now a " + player[turn_number].cards[0], turn_number), Message("You have now a " + player[target_player].cards[0], target_player)]
+            private_messages = [Message("You now have a " + player[turn_number].cards[0], turn_number), Message("You now have a " + player[target_player].cards[0], target_player)]
 
         if card == 5: #Prince
             if(player[turnNumber].has(7)):
                 raise ValueError("Can't discard a Prince if player has the Countess")
-            public_message += "Player " + names[turnNumber] + " discarded his Prince.\n"
+            public_message += "Player " + names[turnNumber] + " discarded their Prince.\n"
 
         if card == 4: #Handmaiden
             player[turnNumber].handMaiden = True
