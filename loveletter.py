@@ -65,21 +65,21 @@ class LoveLetter:
         if card == 3: #Baron
             if(player[turnNumber].cards[0] > player[another_player].cards[0]):
                 player[turnNumber].alive = False
-                public_message += "Player " + names[turnNumber] + " discarded his Baron and had a larger dick than " + names[player_target]
+                public_message += "Player " + names[turnNumber] + " discarded his Baron and had a larger dick than " + names[target_player]
             else if(player[turnNumber].cards[0] < player[another_player].cards[0]):
                 player[another_player] = False
-                public_message += "Player " + names[turnNumber] + " discarded his Baron and had a smaller dick than " + names[player_target]
+                public_message += "Player " + names[turnNumber] + " discarded his Baron and had a smaller dick than " + names[target_player]
 
         if card == 2: #Priest
             player[turnNumber].remove(card)
-            public_message += "Player " + names[turnNumber] + " discarded his Priest targeting player " + names[player_target]
-            private_messages = Message(names[player_target] + " has a " + player[player_target].cards[0]
+            public_message += "Player " + names[turnNumber] + " discarded his Priest targeting player " + names[target_player]
+            private_messages = Message(names[target_player] + " has a " + player[target_player].cards[0], target_player)
 
         if card == 1: #Guard
             if(guess_card in player[another_player].cards):
                 player[another_player].alive = False
-                public_message += "Player " + names[turnNumber] + " discarded his guard targeting player " + names[player_target] + " who died for having a " + card_guess
-            public_message += "Player " + names[turnNumber] + " discarded his guard targeting player " + names[player_target] + " who did not have a " + card_guess
+                public_message += "Player " + names[turnNumber] + " discarded his guard targeting player " + names[target_player] + " who died for having a " + card_guess
+            public_message += "Player " + names[turnNumber] + " discarded his guard targeting player " + names[target_player] + " who did not have a " + card_guess
 
         return [public_message, private_messages]
 
