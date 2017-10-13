@@ -17,16 +17,15 @@ class LoveLetter:
     burn = None
 
     def __init__(players):
-        if(players > 14):
+        if(len(players) > 14):
             raise ValueError("Too many players")
             return
-        players_left = players
-
-        player = [None] * players
+        player = [None] * len(players)
         for p in player:
             p = LoveLetterPlayer(deck.pop())
         p[0].second = deck.pop()
         burn = deck.pop() #Burn
+        names = players
 
     def play(card, target_player = 0, card_guess = 0):
         if card not in player[turnNumber].cards:
@@ -113,6 +112,10 @@ class LoveLetter:
             if i.alive:
                 n += 1
         return n
+
+    # Returns name of current playing player
+    def current_name():
+        return names[turnNumber]
 
 class LoveLetterPlayer:
     handmaiden = False
