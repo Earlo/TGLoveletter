@@ -1,7 +1,7 @@
 #from telegram.ext import Updater, CommandHandler
 from telegram.ext import Updater, CommandHandler
 import pprint
-import loveletter
+from loveletter import LoveLetter
 
 pp = pprint.PrettyPrinter(indent=4)
 
@@ -58,14 +58,26 @@ def startGame(bot, update):
 		print("log: staring game with:" + repr( chats[chatID]['players'] ) )
 		update.message.reply_text( repr( chats[chatID]['players'] ) )
 		bot.sendMessage(parse_mode='Markdown', chat_id=playerID, text="Moi Jäbä privailen tässä saatana")
-
+		chats[chatID]['game'] = LoveLetter( list(chats[chatID]['players']) )
 	except:
 		update.message.reply_text("No game going on in here, use /enter")
+
+def play(bot, update):
+	chatID = update.message.chat.id
+	playerID = update.message.from_user.id
+	messageID = update.message.from_user.id
+	#if chats[chatID]['game']
+
+
+	update.message.reply_text( repr( chats[chatID]['players'] ) )
+
 	
 #update.message.reply_text(update.message.text)
 updater.dispatcher.add_handler(CommandHandler('newGame', startGame))
 updater.dispatcher.add_handler(CommandHandler('start', start))
 updater.dispatcher.add_handler(CommandHandler('enter', enter))
+updater.dispatcher.add_handler(CommandHandler('play', play))
+
 updater.dispatcher.add_handler(CommandHandler('list', ListPlayers))
 updater.dispatcher.add_handler(CommandHandler('help', help))
 updater.dispatcher.add_handler(CommandHandler('rules', rules))
