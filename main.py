@@ -17,12 +17,15 @@ def start(bot, update):
 	update.message.reply_text('Hello World!')
 
 def help(bot, update):
+	chatID = update.message.chat.id
 	bot.sendMessage(parse_mode='Markdown', chat_id=chatID, text=HELP)
 	
 def rules(bot, update):
+	chatID = update.message.chat.id
 	bot.sendMessage(parse_mode='Markdown', chat_id=chatID, text=RULES)
 	
 def lore(bot, update):
+	chatID = update.message.chat.id
 	bot.sendMessage(parse_mode='Markdown', chat_id=chatID, text=LORE)
 
 def enter(bot, update):
@@ -72,7 +75,6 @@ updater.dispatcher.add_handler(CommandHandler('newGame', startGame))
 updater.dispatcher.add_handler(CommandHandler('start', start))
 updater.dispatcher.add_handler(CommandHandler('enter', enter))
 updater.dispatcher.add_handler(CommandHandler('list', ListPlayers))
-
 updater.dispatcher.add_handler(CommandHandler('help', help))
 updater.dispatcher.add_handler(CommandHandler('rules', rules))
 updater.dispatcher.add_handler(CommandHandler('lore', lore))
