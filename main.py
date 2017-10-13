@@ -1,7 +1,7 @@
 #from telegram.ext import Updater, CommandHandler
 from telegram.ext import Updater, CommandHandler
 import pprint
-#import loveletter
+import loveletter
 
 pp = pprint.PrettyPrinter(indent=4)
 
@@ -10,7 +10,6 @@ from messages import *
 chats = {}
 
 updater = Updater('468086505:AAGr_hubo_N0hjIR7ouUkZZvoHnhFl4ngr4')
-
 
 def start(bot, update):
 	chatID = update.message.chat.id
