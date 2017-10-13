@@ -14,17 +14,19 @@ updater = Updater('468086505:AAGr_hubo_N0hjIR7ouUkZZvoHnhFl4ngr4')
 
 def start(bot, update):
 	chatID = update.message.chat.id
-	bot.sendMessage(parse_mode='Markdown', chat_id=chatID, text=LORE)
 	update.message.reply_text('Hello World!')
 
 def help(bot, update):
-	update.message.reply_text(HELP)
+	chatID = update.message.chat.id
+	bot.sendMessage(parse_mode='Markdown', chat_id=chatID, text=HELP)
 	
 def rules(bot, update):
-	update.message.reply_text(RULES)
+	chatID = update.message.chat.id
+	bot.sendMessage(parse_mode='Markdown', chat_id=chatID, text=LORE)
 	
 def lore(bot, update):
-	update.message.reply_text(LORE)
+	chatID = update.message.chat.id
+	bot.sendMessage(parse_mode='Markdown', chat_id=chatID, text=LORE)
 
 def enter(bot, update):
 	chatID = update.message.chat.id
@@ -32,8 +34,6 @@ def enter(bot, update):
 	messageID = update.message.from_user.id
 
 	#update.message.reply_text( "{} from {} in {}".format(messageID, playerID, chatID) )
-	print(chatID, chats)
-	print(chatID in chats)
 	if not chatID in chats:
 		chats[chatID] = { 'players': set(), 'game': None }
 		update.message.reply_text( "Starting gameroom from {}".format( chatID ) )
@@ -42,14 +42,10 @@ def enter(bot, update):
 	AddPlayer(update, chatID, playerID)
 
 def AddPlayer(update, chatID, playerID):
-	print(chats, chatID)
-	print(chats[chatID]['players'])
 	try:
 		chats[chatID]['players'].add(playerID)
-		print(chats[chatID]['players'])
 		update.message.reply_text( "Added {}".format( playerID ) )
 	except:
-		print("?")
 		update.message.reply_text( "wat" )
 
 def ListPlayers(bot, update):
@@ -63,6 +59,8 @@ def startGame(bot, update):
 	try:
 		print("log: staring game with:" + repr( chats[chatID]['players'] ) )
 		update.message.reply_text( repr( chats[chatID]['players'] ) )
+		bot.sendMessage(parse_mode='Markdown', chat_id=playerID, text="Moi Jäbä privailen tässä saatana")
+
 	except:
 		update.message.reply_text("No game going on in here, use /enter")
 
@@ -73,7 +71,6 @@ updater.dispatcher.add_handler(CommandHandler('newGame', startGame))
 updater.dispatcher.add_handler(CommandHandler('start', start))
 updater.dispatcher.add_handler(CommandHandler('enter', enter))
 updater.dispatcher.add_handler(CommandHandler('list', ListPlayers))
-
 updater.dispatcher.add_handler(CommandHandler('help', help))
 updater.dispatcher.add_handler(CommandHandler('rules', rules))
 updater.dispatcher.add_handler(CommandHandler('lore', lore))
