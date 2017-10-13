@@ -22,7 +22,8 @@ def help(bot, update):
 	
 def rules(bot, update):
 	chatID = update.message.chat.id
-	bot.sendMessage(parse_mode='Markdown', chat_id=chatID, text=RULES)
+	bot.sendMessage(parse_mode='Markdown', chat_id=chatID, text=RULES1)
+	bot.sendMessage(parse_mode='Markdown', chat_id=chatID, text=RULES2)
 	
 def lore(bot, update):
 	chatID = update.message.chat.id
