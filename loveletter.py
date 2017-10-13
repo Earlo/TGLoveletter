@@ -24,7 +24,7 @@ class LoveLetter:
 
         player = [None] * players
         for p in player:
-            p = new LoveLetterPlayer(deck.pop())
+            p = LoveLetterPlayer(deck.pop())
         p[0].second = deck.pop()
         burn = deck.pop() #Burn
 
@@ -80,6 +80,7 @@ class LoveLetter:
                 player[another_player].alive = False
                 public_message += "Player " + names[turnNumber] + " discarded his guard targeting player " + names[target_player] + " who died for having a " + card_guess
             public_message += "Player " + names[turnNumber] + " discarded his guard targeting player " + names[target_player] + " who did not have a " + card_guess
+
 
         this.advance()
         return [public_message, private_messages]
