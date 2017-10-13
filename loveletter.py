@@ -81,6 +81,7 @@ class LoveLetter:
                 public_message += "Player " + names[turnNumber] + " discarded his guard targeting player " + names[target_player] + " who died for having a " + card_guess
             public_message += "Player " + names[turnNumber] + " discarded his guard targeting player " + names[target_player] + " who did not have a " + card_guess
 
+        this.advance()
         return [public_message, private_messages]
 
     # Returns index of player who has the turn
