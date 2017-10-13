@@ -33,7 +33,6 @@ def enter(bot, update):
 	playerID = update.message.from_user.id
 	messageID = update.message.from_user.id
 
-	#update.message.reply_text( "{} from {} in {}".format(messageID, playerID, chatID) )
 	if not chatID in chats:
 		chats[chatID] = { 'players': set(), 'game': None }
 		update.message.reply_text( "Starting gameroom from {}".format( chatID ) )
@@ -63,10 +62,8 @@ def startGame(bot, update):
 
 	except:
 		update.message.reply_text("No game going on in here, use /enter")
-
-
 	
-	#update.message.reply_text(update.message.text)
+#update.message.reply_text(update.message.text)
 updater.dispatcher.add_handler(CommandHandler('newGame', startGame))
 updater.dispatcher.add_handler(CommandHandler('start', start))
 updater.dispatcher.add_handler(CommandHandler('enter', enter))
