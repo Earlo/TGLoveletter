@@ -2,10 +2,10 @@ GREET = """This is a bot """
 
 
 HELP = """Commands:
-//help: Get help
-//rules: Learn the rules of the game
-//cards: List the different cards and their names
-//lore: Learn the short lore of the game"""
+/help: Get help
+/rules: Learn the rules of the game
+/cards: List the different cards and their names
+/lore: Learn the short lore of the game"""
 
 RULES = """*How to play*
  Love Letter is played in a series of rounds. Each round represents one day. At the end of each round, one player’s letter reaches Princess Annette, and she reads it. When she reads enough letters from one suitor, she becomes enamored and grants that suitor permission to court her. That player wins the princess’s heart and the game. 
