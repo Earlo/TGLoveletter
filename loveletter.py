@@ -23,77 +23,77 @@ class LoveLetter:
         player = [None] * len(players)
         for p in player:
             p = LoveLetterPlayer(self.deck.pop())
-        self.draw(0)
-        burn = self.deck.pop() #Burn
-        this.names = players
+        draw(0)
+        self.burn = self.deck.pop() #Burn
+        self.names = players
 
     def play(self, card, target_player = 0, card_guess = 0):
-        if card not in player[turnNumber].cards:
+        if card not in self.player[self.turnNumber].cards:
             raise ValueError("Player does not have card")
             return
-        player[turnNumber].remove(card)
+        self.player[self.turnNumber].remove(card)
 
         public_message = ""
         private_messages = None
 
         if card == 8: #Princess
-            player[turnNumber].alive = False
-            public_message += "Player " + this.names[turnNumber] + " discarded the Princess and dieded! RIP\n"
+            player[self.turnNumber].alive = False
+            public_message += "Player " + names[self.turnNumber] + " discarded the Princess and dieded! RIP\n"
     
         if card == 7: #Countess
-            public_message += "Player " + this.names[turnNumber] + " discarded the Countess, but y tho?\n"
+            public_message += "Player " + names[self.turnNumber] + " discarded the Countess, but y tho?\n"
 
         if card == 6: #King
-            if(player[turnNumber].has(7)):
+            if(player[self.turnNumber].has(7)):
                 raise ValueError("Can't discard the King if player has the Countess")
             save = player[target_player].cards[0]
-            player[target_player].cards[0] = this.names[turnNumber].cards[0]
-            player[turnNumber].cards[0] = save
-            public_message += "Player " + this.names[turnNumber] + " discarded the king and switched his hand with " + this.names[target_player] + "\n"
-            private_messages = [Message("You have now a " + player[turn_number].cards[0], turn_number), Message("You have now a " + player[target_player].cards[0], target_player)]
+            player[target_player].cards[0] = names[turnNumber].cards[0]
+            player[self.turnNumber].cards[0] = save
+            public_message += "Player " + names[self.turnNumber] + " discarded the king and switched his hand with " + names[target_player] + "\n"
+            private_messages = [Message("You have now a " + player[self.turnNumber].cards[0], self.turnNumber), Message("You have now a " + player[target_player].cards[0], target_player)]
 
         if card == 5: #Prince
-            if(player[turnNumber].has(7)):
+            if(player[self.turnNumber].has(7)):
                 raise ValueError("Can't discard a Prince if player has the Countess")
-            public_message += "Player " + this.names[turnNumber] + " discarded his prince.\n"
+            public_message += "Player " + self.names[turnNumber] + " discarded his prince.\n"
 
         if card == 4: #Handmaiden
             player[turnNumber].handMaiden = True
-            public_message += "Player " + this.names[turnNumber] + " discarded his whore Handmaiden.\n"
+            public_message += "Player " + self.names[turnNumber] + " discarded his whore Handmaiden.\n"
 
         if card == 3: #Baron
             if(player[turnNumber].cards[0] > player[another_player].cards[0]):
                 player[turnNumber].alive = False
-                public_message += "Player " + this.names[turnNumber] + " discarded his Baron and had a larger dick than " + this.names[target_player]
+                public_message += "Player " + self.names[turnNumber] + " discarded his Baron and had a larger dick than " + self.names[target_player]
             elif(player[turnNumber].cards[0] < player[another_player].cards[0]):
                 player[another_player] = False
-                public_message += "Player " + this.names[turnNumber] + " discarded his Baron and had a smaller dick than " + this.names[target_player]
+                public_message += "Player " + self.names[turnNumber] + " discarded his Baron and had a smaller dick than " + self.names[target_player]
 
         if card == 2: #Priest
             player[turnNumber].remove(card)
-            public_message += "Player " + this.names[turnNumber] + " discarded his Priest targeting player " + this.names[target_player]
-            private_messages = Message(this.names[target_player] + " has a " + player[target_player].cards[0], target_player)
+            public_message += "Player " + self.names[turnNumber] + " discarded his Priest targeting player " + self.names[target_player]
+            private_messages = Message(self.names[target_player] + " has a " + player[target_player].cards[0], target_player)
 
         if card == 1: #Guard
             if(guess_card in player[another_player].cards):
                 player[another_player].alive = False
-                public_message += "Player " + this.names[turnNumber] + " discarded his guard targeting player " + this.names[target_player] + " who died for having a " + card_guess
+                public_message += "Player " + self.names[turnNumber] + " discarded his guard targeting player " + self.names[target_player] + " who died for having a " + card_guess
             else:
-                public_message += "Player " + this.names[turnNumber] + " discarded his guard targeting player " + this.names[target_player] + " who did not have a " + card_guess
+                public_message += "Player " + self.names[turnNumber] + " discarded his guard targeting player " + self.names[target_player] + " who did not have a " + card_guess
 
 
-        this.advance()
+        self.advance()
         return [public_message, private_messages]
 
     # Returns index of player who has the turn
     def turn(self):
-        return turnNumber
+        return self.turnNumber
 
     # Moves the turn forward
     def advance(self):
-        turnNumber = (turnNumber + 1) % players
+        turnNumber = (self.turnNumber + 1) % players
         while(player.alive == False):
-            turnNumber = (turnNumber + 1) % players
+            turnNumber = (self.turnNumber + 1) % players
 
     # Returns the amount of cards left
     def cardsLeft(self):
@@ -109,14 +109,14 @@ class LoveLetter:
     # Returns amount of players alive
     def players_left(self):
         n = 0
-        for i in player:
+        for i in self.player:
             if i.alive:
                 n += 1
         return n
 
     # Returns name of current playing player
     def current_name(self):
-        return this.names[turnNumber]
+        return self.names[self.turnNumber]
 
 class LoveLetterPlayer:
     handmaiden = False
