@@ -1,5 +1,5 @@
 CARDS = dict(map(
-        (lambda (keys, value):
+        (lambda keys, value:
             temp = []
             for key in list(keys):
                 temp.append((key, value))

@@ -1,4 +1,5 @@
 import random
+import mappings
 
 class Message:
 	to = None
@@ -25,8 +26,9 @@ class LoveLetter:
 		self.burn = self.deck.pop() #Burn
 
 	def play(self, card, target_player = 0, card_guess = 0):
-		if card not in self.player[self.turnNumber].cards:
-			raise ValueError("Player does not have card")
+		card = mappings.CARDS(card)
+		if card not in self.current_cards():
+			raise ValueError("Tried to play {}, when the hand consists of {}".format(card, repr(self.current_cards())) )
 			return
 		self.player[self.turnNumber].remove(card)
 
@@ -52,11 +54,11 @@ class LoveLetter:
 		if card == 5: #Prince
 			if (7 in player[self.turnNumber].cards):
 				raise ValueError("Can't discard a Prince if player has the Countess")
-            elif (8 in player[another_player].cards):
+			elif (8 in player[another_player].cards):
 				player[another_player].alive = False
-                public_message += "Player " + self.current_name() + " discarded their prince targeting player " + self.names[target_player] + "Who died discarding the Princess!\n"
-            else:
-                public_message += "Player " + self.current_name() + " discarded their prince targeting player " + self.names[target_player] + "\n"
+				public_message += "Player " + self.current_name() + " discarded their prince targeting player " + self.names[target_player] + "Who died discarding the Princess!\n"
+			else:
+				public_message += "Player " + self.current_name() + " discarded their prince targeting player " + self.names[target_player] + "\n"
 
 		if card == 4: #Handmaiden
 			player[turnNumber].handMaiden = True

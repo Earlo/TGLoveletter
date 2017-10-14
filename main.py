@@ -30,17 +30,11 @@ def lore(bot, update):
 	bot.sendMessage(parse_mode='Markdown', chat_id=chatID, text=LORE)
 
 def enter(bot, update):
-	print("a")
 	chatID = update.message.chat.id
-	print("b")
 	playerUsername = update.message.from_user.username
-	print("1")
 	playerID = update.message.from_user.id
-	print("3")
 	messageID = update.message.message_id
-	print("5")
 	usersToIDs[playerUsername] = playerID
-	print("6")
 	
 	if not chatID in chats:
 		chats[chatID] = { 'players': set(), 'game': None }
@@ -89,11 +83,16 @@ def play(bot, update):
 	try:
 		print(chats[chatID]['game'].current_name(), playerUsername) 
 		if chats[chatID]['game'].current_name() == playerUsername:
-
-			bot.sendMessage(parse_mode='Markdown', chat_id=playerID, text="Korttisi ovat \n/"+'\n/'.join(map(str, chats[chatID]['game'].current_cards())))
+			params = update.message.text.split(" ")[1:]
+			print(params)
+			if len(params) > 0:
+				chats[chatID]['game'].play( *params )
+			else:
+				bot.sendMessage(parse_mode='Markdown', chat_id=playerID, text="Korttisi ovat \n/"+'\n/'.join(map(str, chats[chatID]['game'].current_cards())))
 		else:
 			update.message.reply_text( "Ei sun vuoro äbäj")
 	except Exception as e:
+		print(e)
 		update.message.reply_text( "No game" )
 
 
