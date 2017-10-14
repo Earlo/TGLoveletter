@@ -41,6 +41,9 @@ class LoveLetter:
 		if not self.players[target_player].alive:
 			raise ValueError("Invalid target, target is out of the game!")
 
+		if 1 == card_guess:
+			raise ValueError("Invalid guess, cannot guess Guard.")
+
 		public_message = ""
 		private_messages = None
 		print("kek")
