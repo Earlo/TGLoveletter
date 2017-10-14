@@ -74,6 +74,7 @@ def play(bot, update):
 		print(chats[chatID]['game'])
 		print(chats[chatID]['game'].current_name()) 
 		if chats[chatID]['game'].current_name() == playerID:
+			bot.sendMessage(parse_mode='Markdown', chat_id=chats[chatID]['game'].current_name(), text="")
 			update.message.reply_text( "Sun vuoro" )
 		else:
 			update.message.reply_text( "Ei sun vuoro äbäj")
