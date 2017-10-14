@@ -10,7 +10,7 @@ class Message:
 class LoveLetter:
     deck = [1, 1, 1, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 7, 8]
     last_discard = None
-    random.shuffle(self.deck)
+    random.shuffle(deck)
     turnNumber = 0
     player = None
     names = None
