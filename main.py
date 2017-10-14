@@ -85,7 +85,7 @@ def play(bot, update):
 			params = update.message.text.split(" ")[1:]
 			print(params)
 			if len(params) > 0:
-				chats[chatID]['game'].play( *params )
+				print(chats[chatID]['game'].play( *params ))
 			else:
 				bot.sendMessage(parse_mode='Markdown', chat_id=playerID, text="Your cards are  \n/"+'\n/'.join(map(str, chats[chatID]['game'].current_cards())))
 		else:

@@ -27,6 +27,8 @@ class LoveLetter:
 
 	def play(self, card, target_player = 0, card_guess = 0):
 		card = mappings.CARDS(card)
+		print("mapped into",card)
+		
 		if card not in self.current_cards():
 			raise ValueError("Tried to play {}, when the hand consists of {}".format(card, repr(self.current_cards())) )
 			return

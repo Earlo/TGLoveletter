@@ -1,24 +1,24 @@
+CARDS = {}
+
 def mapKeys(keys, value):
     temp = []
     for key in list(keys):
-        temp.append((key, value))
-    return temp
+        CARDS[key] = value
 
-CARDS = dict(map(
-        (mapKeys
-        ),
-        {
-            (1, "1", "guard"): 1,
+
+localization ={ (1, "1", "guard"): 1,
             (2, "2", "priest"): 2,
             (3, "3", "baron"): 3,
-            (4, "4","handmaid"): 4,
+            (4, "4", "handmaid"): 4,
             (5, "5", "prince"): 5,
             (6, "6", "king"): 6,
-            (7, "7", "countess"), 7,
-            (8, "8", "princess"), 8
-        }.items()
-    )
-)
+            (7, "7", "countess"): 7,
+            (8, "8", "princess"): 8,
+        }
+
+for i in localization.keys():
+    mapKeys( i, localization[i] )
+
 
 CARD_EMOJIS = {
     1:"💂‍♀️",
