@@ -24,8 +24,8 @@ class LoveLetter:
         for p in player:
             p = LoveLetterPlayer(self.deck.pop())
         draw(0)
-        burn = self.deck.pop() #Burn
-        names = players
+        self.burn = self.deck.pop() #Burn
+        self.names = players
 
     def play(self, card, target_player = 0, card_guess = 0):
         if card not in self.player[self.turnNumber].cards:
