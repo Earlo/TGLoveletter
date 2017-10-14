@@ -19,12 +19,12 @@ def start(bot, update):
 def help(bot, update):
 	chatID = update.message.chat.id
 	bot.sendMessage(parse_mode='Markdown', chat_id=chatID, text=HELP)
-	
+
 def rules(bot, update):
 	chatID = update.message.chat.id
 	bot.sendMessage(parse_mode='Markdown', chat_id=chatID, text=RULES1)
 	bot.sendMessage(parse_mode='Markdown', chat_id=chatID, text=RULES2)
-	
+
 def lore(bot, update):
 	chatID = update.message.chat.id
 	bot.sendMessage(parse_mode='Markdown', chat_id=chatID, text=LORE)
@@ -35,7 +35,6 @@ def enter(bot, update):
 	playerID = update.message.from_user.id
 	messageID = update.message.message_id
 	usersToIDs[playerUsername] = playerID
-	
 	if not chatID in chats:
 		chats[chatID] = { 'players': set(), 'game': None }
 		update.message.reply_text( "Starting game room from {}".format( chatID ) )
@@ -48,7 +47,7 @@ def addPlayer(update, chatID, playerID):
 		chats[chatID]['players'].add(playerID)
 		update.message.reply_text( "Added {}".format( playerID ) )
 	except Exception as e:
-		update.message.reply_text( "There was an error adding a player." )
+		update.message.reply_text( "There was an error in adding a player." )
 
 def listPlayers(bot, update):
 	chatID = update.message.chat.id
@@ -60,18 +59,18 @@ def startGame(bot, update):
 	playerID = update.message.from_user.id
 	messageID = update.message.message_id
 	usersToIDs[playerUsername] = playerID
-	
+
 	try:
 		print("log: staring game with:" + repr( chats[chatID]['players'] ) )
 		names = list( chats[chatID]['players'] )
 		update.message.reply_text( repr( names ) )
 		chats[chatID]['game'] = LoveLetter( list(chats[chatID]['players']) )
-		bot.sendMessage(parse_mode='Markdown', chat_id=playerID, text="Moi Jäbä privailen tässä saatana")
+		bot.sendMessage(parse_mode='Markdown', chat_id=playerID, text="I'll be sending your hand information privately from here!")
 		print("log: staring game with:" + repr( chats[chatID]['game'] ) )
-	
+
 	except Exception as e:
 		print(e)
-		bot.sendMessage(parse_mode='Markdown', chat_id=playerID, text="I'll be sending your hand information privately from here!")
+		bot.sendMessage(parse_mode='Markdown', chat_id=playerID, text="Error starting the game")
 
 def play(bot, update):
 	chatID = update.message.chat.id
@@ -79,24 +78,21 @@ def play(bot, update):
 	playerID = update.message.from_user.id
 	messageID = update.message.message_id
 	usersToIDs[playerUsername] = playerID
-	
+
 	try:
-		print(chats[chatID]['game'].current_name(), playerUsername) 
+		print(chats[chatID]['game'].current_name(), playerUsername)
 		if chats[chatID]['game'].current_name() == playerUsername:
 			params = update.message.text.split(" ")[1:]
 			print(params)
 			if len(params) > 0:
 				chats[chatID]['game'].play( *params )
 			else:
-				bot.sendMessage(parse_mode='Markdown', chat_id=playerID, text="Korttisi ovat \n/"+'\n/'.join(map(str, chats[chatID]['game'].current_cards())))
+				bot.sendMessage(parse_mode='Markdown', chat_id=playerID, text="Your cards are  \n/"+'\n/'.join(map(str, chats[chatID]['game'].current_cards())))
 		else:
-			update.message.reply_text( "Ei sun vuoro äbäj")
+			update.message.reply_text( "Not your turn...")
 	except Exception as e:
-		print(e)
-		update.message.reply_text( "No game" )
+		update.message.reply_text( "No game: " + e )
 
-
-	
 #update.message.reply_text(update.message.text)
 updater.dispatcher.add_handler(CommandHandler('newGame', startGame))
 updater.dispatcher.add_handler(CommandHandler('start', start))
