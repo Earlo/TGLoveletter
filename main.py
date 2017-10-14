@@ -72,10 +72,9 @@ def play(bot, update):
 	messageID = update.message.from_user.id
 	try:
 		print(chats[chatID]['game'])
-		print(chats[chatID]['game'].current_name()) 
+		print(chats[chatID]['game'].current_name(), playerID) 
 		if chats[chatID]['game'].current_name() == playerID:
-			bot.sendMessage(parse_mode='Markdown', chat_id=chats[chatID]['game'].current_name(), text="")
-			update.message.reply_text( "Sun vuoro" )
+			bot.sendMessage(parse_mode='Markdown', chat_id=playerID, text="Korttisi ovat \n/"+'\n/'.join(map(str, chats[chatID]['game'].current_cards())))
 		else:
 			update.message.reply_text( "Ei sun vuoro äbäj")
 	except Exception as e:

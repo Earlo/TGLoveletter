@@ -20,7 +20,7 @@ class LoveLetter:
 			return
 		self.player = []
 		for i  in range(len(playerIDs)):
-			self.player.append(LoveLetterPlayer(self.deck.pop()), playerIDs[i])
+			self.player.append(LoveLetterPlayer(self.deck.pop(), playerIDs[i]))
 		self.draw(0)
 		self.burn = self.deck.pop() #Burn
 
