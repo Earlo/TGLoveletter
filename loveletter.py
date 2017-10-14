@@ -64,7 +64,7 @@ class LoveLetter:
 				public_message += "Player " + self.current_name() + " discarded their prince targeting player " + self.names[target_player] + "\n"
 
 		elif card == 4: #Handmaiden
-			self.players[self.turnNumber].handMaiden = True
+			self.players[self.turnNumber].handMaid = True
 			public_message += "Player " + self.current_name() + " discarded their Handmaiden.\ They cannot be targeted before their next turn. \n"
 
 		elif card == 3: #Baron
@@ -74,7 +74,7 @@ class LoveLetter:
 			elif(self.players[self.turnNumber].cards[0] < self.players[target_player].cards[0]):
 				self.players[self.turnNumber] = False
 				public_message += "Player " + self.current_name() + " discarded their Baron and had a smaller dick than " + self.names[target_player] + "\n"
-				
+
 
 		elif card == 2: #Priest
 			self.players[self.turnNumber].remove(card)
@@ -88,10 +88,8 @@ class LoveLetter:
 			else:
 				public_message += "Player " + self.current_name() + " discarded their guard targeting player " + self.names[target_player] + " who did not have a " + str(card_guess) + "\n"
 
-		print("lel")
 
-		self.advance()
-		print("njet")
+		newCard = self.advance()
 		return [public_message, private_messages]
 
 	# Returns index of player who has the turn
@@ -102,8 +100,8 @@ class LoveLetter:
 	def advance(self):
 		turnNumber = (self.turnNumber + 1) % len(self.players)
 		while(self.players[turnNumber].alive == False):
-			print("inf?")
 			turnNumber = (self.turnNumber + 1) % len(self.players)
+		draw(self.turnNumber)
 
 	# Returns the amount of cards left
 	def cardsLeft(self):
@@ -114,7 +112,7 @@ class LoveLetter:
 		if(len(self.deck) == 0 or self.players_left() == 0):
 			return 0
 		new_card = self.deck.pop()
-		self.players[player_number].cards[1] = new_card
+		self.players[player_number].cards.append( new_card )
 		return new_card
 	# Returns amount of players alive
 	def players_left(self):
@@ -132,11 +130,10 @@ class LoveLetter:
 		return self.players[self.turnNumber].cards
 
 class LoveLetterPlayer:
-	handmaiden = False
-	cards = [None] * 2
-	alive = True
 	def __init__(self, card, name):
-		self.cards[0] = card
+		self.handMaid = False
+		self.alive = True
+		self.cards = [card]
 		self.name = name
 
 	def remove(self, card):
