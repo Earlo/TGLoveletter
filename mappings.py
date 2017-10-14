@@ -1,9 +1,11 @@
+def mapKeys(keys, value):
+    temp = []
+    for key in list(keys):
+        temp.append((key, value))
+    return temp
+
 CARDS = dict(map(
-        (lambda keys, value:
-            temp = []
-            for key in list(keys):
-                temp.append((key, value))
-            return temp
+        (mapKeys
         ),
         {
             (1, "1", "guard"): 1,
