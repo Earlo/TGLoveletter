@@ -30,10 +30,12 @@ class LoveLetter:
 		print(mappings.CARDS)
 		card = mappings.CARDS[card]
 		print("mapped into",card)
-		
+
 		if card not in self.current_cards():
 			raise ValueError("Tried to play {}, when the hand consists of {}".format(card, repr(self.current_cards())) )
 		self.players[self.turnNumber].remove(card)
+
+
 
 		public_message = ""
 		private_messages = None
@@ -74,7 +76,9 @@ class LoveLetter:
 			elif(self.players[self.turnNumber].cards[0] < self.players[target_player].cards[0]):
 				self.players[self.turnNumber] = False
 				public_message += "Player " + self.current_name() + " discarded their Baron and had a smaller dick than " + self.names[target_player] + "\n"
-				
+			else:
+				public_message += "Player " + self.current_name() + " discarded their Baron and had a dick of the same size as " + self.names[target_player] + "\n"
+
 
 		elif card == 2: #Priest
 			self.players[self.turnNumber].remove(card)
@@ -132,7 +136,7 @@ class LoveLetter:
 		return self.players[self.turnNumber].cards
 
 class LoveLetterPlayer:
-	handmaiden = False
+	handmaid = False
 	cards = [None] * 2
 	alive = True
 	def __init__(self, card, name):
