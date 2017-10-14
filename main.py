@@ -40,16 +40,16 @@ def enter(bot, update):
 		update.message.reply_text( "Starting game room from {}".format( chatID ) )
 	else:
 		update.message.reply_text( "Already a game in {}.".format( chatID ) )
-	AddPlayer(update, chatID, playerID)
+	addPlayer(update, chatID, playerID)
 
-def AddPlayer(update, chatID, playerID):
+def addPlayer(update, chatID, playerID):
 	try:
 		chats[chatID]['players'].add(playerID)
 		update.message.reply_text( "Added {}".format( playerID ) )
 	except:
 		update.message.reply_text( "There was an error adding a player." )
 
-def ListPlayers(bot, update):
+def listPlayers(bot, update):
 	chatID = update.message.chat.id
 	update.message.reply_text( repr( chats[chatID]['players'] ) )
 
@@ -71,7 +71,7 @@ def startGame(bot, update):
 updater.dispatcher.add_handler(CommandHandler('newGame', startGame))
 updater.dispatcher.add_handler(CommandHandler('start', start))
 updater.dispatcher.add_handler(CommandHandler('enter', enter))
-updater.dispatcher.add_handler(CommandHandler('list', ListPlayers))
+updater.dispatcher.add_handler(CommandHandler('list', listPlayers))
 updater.dispatcher.add_handler(CommandHandler('help', help))
 updater.dispatcher.add_handler(CommandHandler('rules', rules))
 updater.dispatcher.add_handler(CommandHandler('lore', lore))
