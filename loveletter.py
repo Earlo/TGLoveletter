@@ -54,7 +54,7 @@ class LoveLetter:
 		elif card == 5: #Prince
 			if (7 in player[self.turnNumber].cards):
 				raise ValueError("Can't discard a Prince if you have the Countess")
-            elif (8 in player[another_player].cards):
+			elif (8 in player[another_player].cards):
 				player[another_player].alive = False
 				public_message += "Player " + self.current_name() + " discarded their prince targeting player " + self.names[target_player] + "Who died discarding the Princess!\n"
 			else:
