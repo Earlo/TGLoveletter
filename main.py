@@ -18,12 +18,12 @@ def start(bot, update):
 def help(bot, update):
 	chatID = update.message.chat.id
 	bot.sendMessage(parse_mode='Markdown', chat_id=chatID, text=HELP)
-	
+
 def rules(bot, update):
 	chatID = update.message.chat.id
 	bot.sendMessage(parse_mode='Markdown', chat_id=chatID, text=RULES1)
 	bot.sendMessage(parse_mode='Markdown', chat_id=chatID, text=RULES2)
-	
+
 def lore(bot, update):
 	chatID = update.message.chat.id
 	bot.sendMessage(parse_mode='Markdown', chat_id=chatID, text=LORE)
@@ -45,7 +45,7 @@ def addPlayer(update, chatID, playerID):
 		chats[chatID]['players'].add(playerID)
 		update.message.reply_text( "Added {}".format( playerID ) )
 	except Exception as e:
-		update.message.reply_text( "There was an error adding a player." )
+		update.message.reply_text( "There was an error in adding a player." )
 
 def listPlayers(bot, update):
 	chatID = update.message.chat.id
@@ -59,12 +59,12 @@ def startGame(bot, update):
 		print("log: staring game with:" + repr( chats[chatID]['players'] ) )
 		update.message.reply_text( repr( chats[chatID]['players'] ) )
 		chats[chatID]['game'] = LoveLetter( list(chats[chatID]['players']) )
-		bot.sendMessage(parse_mode='Markdown', chat_id=playerID, text="Moi Jäbä privailen tässä saatana")
+		bot.sendMessage(parse_mode='Markdown', chat_id=playerID, text="I'll be sending your hand information privately from here!")
 		print("log: staring game with:" + repr( chats[chatID]['game'] ) )
-	
+
 	except Exception as e:
 		print(e)
-		bot.sendMessage(parse_mode='Markdown', chat_id=playerID, text="I'll be sending your hand information privately from here!")
+		bot.sendMessage(parse_mode='Markdown', chat_id=playerID, text="Error starting the game")
 
 def play(bot, update):
 	chatID = update.message.chat.id
@@ -72,7 +72,7 @@ def play(bot, update):
 	messageID = update.message.from_user.id
 	try:
 		print(chats[chatID]['game'])
-		print(chats[chatID]['game'].current_name()) 
+		print(chats[chatID]['game'].current_name())
 		if chats[chatID]['game'].current_name() == playerID:
 			bot.sendMessage(parse_mode='Markdown', chat_id=chats[chatID]['game'].current_name(), text="")
 			update.message.reply_text( "Sun vuoro" )
@@ -82,7 +82,7 @@ def play(bot, update):
 		update.message.reply_text( "No game" )
 
 
-	
+
 #update.message.reply_text(update.message.text)
 updater.dispatcher.add_handler(CommandHandler('newGame', startGame))
 updater.dispatcher.add_handler(CommandHandler('start', start))
