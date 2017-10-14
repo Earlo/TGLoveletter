@@ -44,7 +44,7 @@ def AddPlayer(update, chatID, playerID):
 	try:
 		chats[chatID]['players'].add(playerID)
 		update.message.reply_text( "Added {}".format( playerID ) )
-	except:
+	except Exception as e:
 		update.message.reply_text( "wat" )
 
 def ListPlayers(bot, update):
@@ -58,19 +58,28 @@ def startGame(bot, update):
 	try:
 		print("log: staring game with:" + repr( chats[chatID]['players'] ) )
 		update.message.reply_text( repr( chats[chatID]['players'] ) )
-		bot.sendMessage(parse_mode='Markdown', chat_id=playerID, text="Moi Jäbä privailen tässä saatana")
 		chats[chatID]['game'] = LoveLetter( list(chats[chatID]['players']) )
-	except:
+		bot.sendMessage(parse_mode='Markdown', chat_id=playerID, text="Moi Jäbä privailen tässä saatana")
+		print("log: staring game with:" + repr( chats[chatID]['game'] ) )
+	
+	except Exception as e:
+		print(e)
 		update.message.reply_text("No game going on in here, use /enter")
 
 def play(bot, update):
 	chatID = update.message.chat.id
 	playerID = update.message.from_user.id
 	messageID = update.message.from_user.id
-	#if chats[chatID]['game']
+	try:
+		print(chats[chatID]['game'])
+		print(chats[chatID]['game'].current_name()) 
+		if chats[chatID]['game'].current_name() == playerID:
+			update.message.reply_text( "Sun vuoro" )
+		else:
+			update.message.reply_text( "Ei sun vuoro äbäj")
+	except Exception as e:
+		update.message.reply_text( "No game" )
 
-
-	update.message.reply_text( repr( chats[chatID]['players'] ) )
 
 	
 #update.message.reply_text(update.message.text)
