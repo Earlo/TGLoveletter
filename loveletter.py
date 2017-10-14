@@ -23,7 +23,7 @@ class LoveLetter:
         player = [None] * len(players)
         for p in player:
             p = LoveLetterPlayer(self.deck.pop())
-        draw(0)
+        self.draw(0)
         self.burn = self.deck.pop() #Burn
         self.names = players
 
@@ -104,7 +104,7 @@ class LoveLetter:
         if(len(self.deck) == 0 or players_left() == 0):
             return 0
         new_card = self.deck.pop()
-        player[player_number].cards[1] = new_card
+        self.player[player_number].cards[1] = new_card
         return new_card
     # Returns amount of players alive
     def players_left(self):
