@@ -123,15 +123,15 @@ class LoveLetterPlayer:
     cards = [None] * 2
     alive = True
     def __init__(self, card):
-        cards[0] = card
+        self.cards[0] = card
 
     def remove(self, card):
         handMaiden = False
-        if(cards[1] == card):
-            cards[1] == None
+        if(self.cards[1] == card):
+            self.cards[1] = None
             return True
-        elif(cards[0] == card):
-            cards[0] == cards[1]
-            cards[1] == None
+        elif(self.cards[0] == card):
+            self.cards[0] = self.cards[1]
+            self.cards[1] = None
             return True
         return False
