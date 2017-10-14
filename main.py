@@ -90,11 +90,11 @@ def play(bot, update):
 		print(chats[chatID]['game'].current_name(), playerUsername)
 		if chats[chatID]['game'].current_name() == playerUsername:
 
-			bot.sendMessage(parse_mode='Markdown', chat_id=playerID, text="Korttisi ovat \n/"+'\n/'.join(map(str, chats[chatID]['game'].current_cards())))
+			bot.sendMessage(parse_mode='Markdown', chat_id=playerID, text="Your cards are  \n/"+'\n/'.join(map(str, chats[chatID]['game'].current_cards())))
 		else:
-			update.message.reply_text( "Ei sun vuoro äbäj")
+			update.message.reply_text( "Not your turn...")
 	except Exception as e:
-		update.message.reply_text( "No game" )
+		update.message.reply_text( "No game: " + e )
 
 
 
