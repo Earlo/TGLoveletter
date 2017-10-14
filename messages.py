@@ -8,14 +8,15 @@ HELP = """Commands:
 /lore: Learn the short lore of the game"""
 
 RULES1 = """*How to play*
- Love Letter is played in a series of rounds. Each round represents one day. At the end of each round, one player’s letter reaches Princess Annette, and she reads it. When she reads enough letters from one suitor, she becomes enamored and grants that suitor permission to court her. That player wins the princess’s heart and the game. 
+Love Letter is played in a series of rounds. Each round represents one day. At the end of each round, one player’s letter reaches Princess Annette, and she reads it. When she reads enough letters from one suitor, she becomes enamored and grants that suitor permission to court her. That player wins the princess’s heart and the game. 
 *Taking a turn*
 On your turn, you draw a card from the deck and add it to your hand. Then choose one of the two cards in your hand and discard it. Apply any effect on the card you discarded. You must apply its effect, even if it is bad for you. See below for the effects and special cases of each individual card. All discarded cards remain in front of the player who discarded them. Overlap the cards so that it’s clear in which order they were discarded. This helps players to figure out which cards other players might be holding. Once you finish applying the card’s effect, the turn passes to the next player.
 *Out of the round*
 If a player is knocked out of the round, that player discards the card in his or her hand (do not apply the card’s effect) and takes no more turns until next round.
 *End of a round*
 A round ends if the deck is empty at the end of a turn. The royal residence closes for the evening, the person closest to the princess delivers the love letter, and Princess Annette retires to her chambers to read it. All players still in the round reveal their hands. The player with the highest ranked person wins the round. In case of a tie, the player who discarded the highest total value of cards wins. A round also ends if all players but one are out of the round, in which case the remaining player wins. The winner receives a token of affection. A new round begins after the previous one ends. The winner of the previous round goes first, because the princess speaks kindly of him or her at breakfast.
-*Winning* A player wins the game after winning a number of tokens based on the number of players:
+*Winning* 
+A player wins the game after winning a number of tokens based on the number of players:
   • 2 Players 7 tokens 
   • 3 Players 5 tokens 
   • 4 players 4 tokens"""
