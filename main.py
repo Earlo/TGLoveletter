@@ -8,6 +8,7 @@ pp = pprint.PrettyPrinter(indent=4)
 from messages import *
 
 chats = {}
+usersToIDs = {}
 
 updater = Updater('468086505:AAGr_hubo_N0hjIR7ouUkZZvoHnhFl4ngr4')
 
@@ -29,16 +30,24 @@ def lore(bot, update):
 	bot.sendMessage(parse_mode='Markdown', chat_id=chatID, text=LORE)
 
 def enter(bot, update):
+	print("a")
 	chatID = update.message.chat.id
+	print("b")
+	playerUsername = update.message.from_user.username
+	print("1")
 	playerID = update.message.from_user.id
-	messageID = update.message.from_user.id
+	print("3")
+	messageID = update.message.message_id
+	print("5")
+	usersToIDs[playerUsername] = playerID
+	print("6")
 
 	if not chatID in chats:
 		chats[chatID] = { 'players': set(), 'game': None }
 		update.message.reply_text( "Starting game room from {}".format( chatID ) )
 	else:
 		update.message.reply_text( "Already a game in {}.".format( chatID ) )
-	addPlayer(update, chatID, playerID)
+	addPlayer(update, chatID, playerUsername)
 
 def addPlayer(update, chatID, playerID):
 	try:
@@ -53,11 +62,15 @@ def listPlayers(bot, update):
 
 def startGame(bot, update):
 	chatID = update.message.chat.id
+	playerUsername = update.message.from_user.username
 	playerID = update.message.from_user.id
-	messageID = update.message.from_user.id
+	messageID = update.message.message_id
+	usersToIDs[playerUsername] = playerID
+
 	try:
 		print("log: staring game with:" + repr( chats[chatID]['players'] ) )
-		update.message.reply_text( repr( chats[chatID]['players'] ) )
+		names = list( chats[chatID]['players'] )
+		update.message.reply_text( repr( names ) )
 		chats[chatID]['game'] = LoveLetter( list(chats[chatID]['players']) )
 		bot.sendMessage(parse_mode='Markdown', chat_id=playerID, text="I'll be sending your hand information privately from here!")
 		print("log: staring game with:" + repr( chats[chatID]['game'] ) )
@@ -68,14 +81,16 @@ def startGame(bot, update):
 
 def play(bot, update):
 	chatID = update.message.chat.id
+	playerUsername = update.message.from_user.username
 	playerID = update.message.from_user.id
-	messageID = update.message.from_user.id
+	messageID = update.message.message_id
+	usersToIDs[playerUsername] = playerID
+
 	try:
-		print(chats[chatID]['game'])
-		print(chats[chatID]['game'].current_name())
-		if chats[chatID]['game'].current_name() == playerID:
-			bot.sendMessage(parse_mode='Markdown', chat_id=chats[chatID]['game'].current_name(), text="")
-			update.message.reply_text( "Sun vuoro" )
+		print(chats[chatID]['game'].current_name(), playerUsername)
+		if chats[chatID]['game'].current_name() == playerUsername:
+
+			bot.sendMessage(parse_mode='Markdown', chat_id=playerID, text="Korttisi ovat \n/"+'\n/'.join(map(str, chats[chatID]['game'].current_cards())))
 		else:
 			update.message.reply_text( "Ei sun vuoro äbäj")
 	except Exception as e:
