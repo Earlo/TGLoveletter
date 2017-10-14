@@ -35,7 +35,11 @@ class LoveLetter:
 			raise ValueError("Tried to play {}, when the hand consists of {}".format(card, repr(self.current_cards())) )
 		self.players[self.turnNumber].remove(card)
 
+		if self.players[target_player].handMaid
+			raise ValueError("Invalid target, target has a Handmaid played!")
 
+		if not self.players[target_player].alive:
+			raise ValueError("Invalid target, target is out of the game!")
 
 		public_message = ""
 		private_messages = None
@@ -67,7 +71,7 @@ class LoveLetter:
 
 		elif card == 4: #Handmaiden
 			self.players[self.turnNumber].handMaid = True
-			public_message += "Player " + self.current_name() + " discarded their Handmaiden.\ They cannot be targeted before their next turn. \n"
+			public_message += "Player " + self.current_name() + " discarded their Handmaid. They cannot be targeted before their next turn. \n"
 
 		elif card == 3: #Baron
 			if(self.players[self.turnNumber].cards[0] > self.players[target_player].cards[0]):
