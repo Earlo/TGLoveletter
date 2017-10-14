@@ -38,10 +38,10 @@ class LoveLetter:
 
         if card == 8: #Princess
             player[self.turnNumber].alive = False
-            public_message += "Player " + names[self.turnNumber] + " discarded the Princess and dieded! RIP\n"
+            public_message += "Player " + names[self.turnNumber] + " discarded their Princess and dieded! RIP\n"
     
         if card == 7: #Countess
-            public_message += "Player " + names[self.turnNumber] + " discarded the Countess, but y tho?\n"
+            public_message += "Player " + names[self.turnNumber] + " discarded their Countess, but y tho?\n"
 
         if card == 6: #King
             if(player[self.turnNumber].has(7)):
@@ -49,37 +49,38 @@ class LoveLetter:
             save = player[target_player].cards[0]
             player[target_player].cards[0] = names[turnNumber].cards[0]
             player[self.turnNumber].cards[0] = save
-            public_message += "Player " + names[self.turnNumber] + " discarded the king and switched his hand with " + names[target_player] + "\n"
+            public_message += "Player " + names[self.turnNumber] + " discarded their King and switched their hand with " + names[target_player] + "\n"
             private_messages = [Message("You have now a " + player[self.turnNumber].cards[0], self.turnNumber), Message("You have now a " + player[target_player].cards[0], target_player)]
 
         if card == 5: #Prince
             if(player[self.turnNumber].has(7)):
                 raise ValueError("Can't discard a Prince if player has the Countess")
-            public_message += "Player " + self.names[turnNumber] + " discarded his prince.\n"
+            else:
+                public_message += "Player " + self.names[turnNumber] + " discarded their Prince targeting player" + self.names[target_player] + "\n"
 
         if card == 4: #Handmaiden
             player[turnNumber].handMaiden = True
-            public_message += "Player " + self.names[turnNumber] + " discarded his whore Handmaiden.\n"
+            public_message += "Player " + self.names[turnNumber] + " discarded their Handmaiden.\n"
 
         if card == 3: #Baron
             if(player[turnNumber].cards[0] > player[another_player].cards[0]):
                 player[turnNumber].alive = False
-                public_message += "Player " + self.names[turnNumber] + " discarded his Baron and had a larger dick than " + self.names[target_player]
+                public_message += "Player " + self.names[turnNumber] + " discarded their Baron and had a larger dick than " + self.names[target_player] + "\n"
             elif(player[turnNumber].cards[0] < player[another_player].cards[0]):
                 player[another_player] = False
-                public_message += "Player " + self.names[turnNumber] + " discarded his Baron and had a smaller dick than " + self.names[target_player]
+                public_message += "Player " + self.names[turnNumber] + " discarded their Baron and had a smaller dick than " + self.names[target_player] + "\n"
 
         if card == 2: #Priest
             player[turnNumber].remove(card)
-            public_message += "Player " + self.names[turnNumber] + " discarded his Priest targeting player " + self.names[target_player]
-            private_messages = Message(self.names[target_player] + " has a " + player[target_player].cards[0], target_player)
+            public_message += "Player " + self.names[turnNumber] + " discarded their Priest targeting player " + self.names[target_player] + "\n"
+            private_messages = Message(self.names[target_player] + " has a " + player[target_player].cards[0], target_player) + "\n" 
 
         if card == 1: #Guard
             if(guess_card in player[another_player].cards):
                 player[another_player].alive = False
-                public_message += "Player " + self.names[turnNumber] + " discarded his guard targeting player " + self.names[target_player] + " who died for having a " + card_guess
+                public_message += "Player " + self.names[turnNumber] + " discarded their Guard targeting player " + self.names[target_player] + " who died for having a " + card_guess + "\n"
             else:
-                public_message += "Player " + self.names[turnNumber] + " discarded his guard targeting player " + self.names[target_player] + " who did not have a " + card_guess
+                public_message += "Player " + self.names[turnNumber] + " discarded their Guard targeting player " + self.names[target_player] + " who did not have a " + card_guess + "\n"
 
 
         self.advance()
