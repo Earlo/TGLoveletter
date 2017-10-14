@@ -35,19 +35,19 @@ def enter(bot, update):
 
 	if not chatID in chats:
 		chats[chatID] = { 'players': set(), 'game': None }
-		update.message.reply_text( "Starting gameroom from {}".format( chatID ) )
+		update.message.reply_text( "Starting game room from {}".format( chatID ) )
 	else:
-		update.message.reply_text( "already game in {}.".format( chatID ) )
-	AddPlayer(update, chatID, playerID)
+		update.message.reply_text( "Already a game in {}.".format( chatID ) )
+	addPlayer(update, chatID, playerID)
 
-def AddPlayer(update, chatID, playerID):
+def addPlayer(update, chatID, playerID):
 	try:
 		chats[chatID]['players'].add(playerID)
 		update.message.reply_text( "Added {}".format( playerID ) )
 	except Exception as e:
-		update.message.reply_text( "wat" )
+		update.message.reply_text( "There was an error adding a player." )
 
-def ListPlayers(bot, update):
+def listPlayers(bot, update):
 	chatID = update.message.chat.id
 	update.message.reply_text( repr( chats[chatID]['players'] ) )
 
@@ -64,7 +64,7 @@ def startGame(bot, update):
 	
 	except Exception as e:
 		print(e)
-		update.message.reply_text("No game going on in here, use /enter")
+		bot.sendMessage(parse_mode='Markdown', chat_id=playerID, text="I'll be sending your hand information privately from here!")
 
 def play(bot, update):
 	chatID = update.message.chat.id
@@ -88,7 +88,7 @@ updater.dispatcher.add_handler(CommandHandler('start', start))
 updater.dispatcher.add_handler(CommandHandler('enter', enter))
 updater.dispatcher.add_handler(CommandHandler('play', play))
 
-updater.dispatcher.add_handler(CommandHandler('list', ListPlayers))
+updater.dispatcher.add_handler(CommandHandler('list', listPlayers))
 updater.dispatcher.add_handler(CommandHandler('help', help))
 updater.dispatcher.add_handler(CommandHandler('rules', rules))
 updater.dispatcher.add_handler(CommandHandler('lore', lore))
