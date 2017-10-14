@@ -23,7 +23,7 @@ class LoveLetter:
         player = [None] * len(players)
         for p in player:
             p = LoveLetterPlayer(self.deck.pop())
-        p[0].second = self.deck.pop()
+        draw(0)
         burn = self.deck.pop() #Burn
         names = players
 
