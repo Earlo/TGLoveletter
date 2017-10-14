@@ -102,7 +102,7 @@ class LoveLetter:
 
     # Draws a new card, returns the card drawn
     def draw(self, player_number):
-        if(len(self.deck) == 0 or players_left() == 0):
+        if(len(self.deck) == 0 or self.players_left() == 0):
             return 0
         new_card = self.deck.pop()
         self.player[player_number].cards[1] = new_card
