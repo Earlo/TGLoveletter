@@ -19,6 +19,17 @@ localization ={ (1, "1", "guard"): 1,
 for i in localization.keys():
     mapKeys( i, localization[i] )
 
+NUM_TO_CARDS = {
+    1: "Guard",
+    2: "Priest",
+    3: "Baron",
+    4: "Handmaid",
+    5: "Prince",
+    6: "King",
+    7: "Countess",
+    8: "Princess"
+}
+
 
 CARD_EMOJIS = {
     1:"💂‍♀️",
